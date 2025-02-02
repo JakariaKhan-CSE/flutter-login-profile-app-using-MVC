@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_profile_app/controller/loginProvider.dart';
+import 'package:flutter_login_profile_app/controller/profileProvider.dart';
 import 'package:flutter_login_profile_app/view/login_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => LoginNotifier(),)
+    ChangeNotifierProvider(create: (context) => LoginNotifier(),),
+    ChangeNotifierProvider(create: (context) => ProfileNotifier(),),
   ],child: MyApp(),),
   );
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_login_profile_app/model/profileResModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/loginModel.dart';
@@ -41,41 +42,40 @@ class AuthHelper{
 
   }
 
-// // Get Profile
-//   static Future<ProfileResponse> getProfile()async{
-//     final SharedPreferences pref = await SharedPreferences.getInstance();
-//     String? token = pref.getString("token");
-//     String? userId = pref.getString('userId');
-//
-//     http.Response? response;
-//     Map<String, String> requestHeaders = {
-//       "Content-Type": "application/json",
-//       "x-auth-token": '$token'  // this is x-auth-token same as backend req.header("x-auth-token");
-//     };
-//     try{
-//       response = await http.get(Uri.parse('${Config.apiUrl}${Config.profileUrl}/$userId'),
-//           headers: requestHeaders);
-//     }catch(e)
-//     {
-//       //print('update profile api call error: $e');
-//     }
-//
-//     if(response!.statusCode == 200)
-//     {
-//       //  var data = jsonDecode(response.body);
-//       // print(data);
-//
-//       ProfileResponse profile;
-//
-//       profile = profileResponseFromJson(response.body);
-//
-//
-//       return profile;
-//     }
-//     else{
-//       throw Exception('Failed to get profile');
-//     }
-//
-//   }
+// Get Profile
+  static Future<ProfileResModel> getProfile()async{
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    String? token = pref.getString("token");
+
+    http.Response? response;
+    Map<String, String> requestHeaders = {
+      "Content-Type": "application/json",
+      "Authorization": 'Bearer $token'  // this is x-auth-token same as backend req.header("x-auth-token");
+    };
+    try{
+      response = await http.get(Uri.parse('${Config.apiUrl}${Config.profileUrl}'),
+          headers: requestHeaders);
+    }catch(e)
+    {
+      //print('update profile api call error: $e');
+    }
+
+    if(response!.statusCode == 200)
+    {
+      //  var data = jsonDecode(response.body);
+      // print(data);
+
+      ProfileResModel profile;
+
+      profile = ProfileResModel.fromJson(jsonDecode(response.body));
+
+
+      return profile;
+    }
+    else{
+      throw Exception('Failed to get profile');
+    }
+
+  }
 
 }
