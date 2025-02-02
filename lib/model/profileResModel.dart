@@ -8,13 +8,13 @@ class ProfileResModel {
   ProfileResModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
+    data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -63,25 +63,25 @@ class Data {
     isDelete = json['isDelete'];
     status = json['status'];
     validation = json['validation'] != null
-        ? new Validation.fromJson(json['validation'])
+        ? Validation.fromJson(json['validation'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['email'] = this.email;
-    data['contact'] = this.contact;
-    data['profilePicture'] = this.profilePicture;
-    data['role'] = this.role;
-    data['fcmToken'] = this.fcmToken;
-    data['isActive'] = this.isActive;
-    data['isDelete'] = this.isDelete;
-    data['status'] = this.status;
-    if (this.validation != null) {
-      data['validation'] = this.validation!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['email'] = email;
+    data['contact'] = contact;
+    data['profilePicture'] = profilePicture;
+    data['role'] = role;
+    data['fcmToken'] = fcmToken;
+    data['isActive'] = isActive;
+    data['isDelete'] = isDelete;
+    data['status'] = status;
+    if (validation != null) {
+      data['validation'] = validation!.toJson();
     }
     return data;
   }
@@ -97,8 +97,8 @@ class Validation {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['isVerified'] = this.isVerified;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['isVerified'] = isVerified;
     return data;
   }
 }
